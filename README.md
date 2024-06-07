@@ -2,6 +2,8 @@
 
 This repository contains the static site used to visualize the data collected from the "Patio Walk" during the European Heritage Days on October 7, 2022. This event was part of a broader effort to understand and document the material and immaterial heritage of Axerquía, a historic district in Córdoba.
 
+See the visualization hosted here: [Patio Walk 2022](https://dariahcloud.web.illinois.edu/cordoba).
+
 ## About the Project
 
 The "Patio Walk" project employed ICT tools to investigate the heritage value of collective housing in Córdoba, specifically focusing on the traditional patio houses. Volunteers equipped with GPS-enabled devices documented communal patios and conducted interviews with residents, contributing to a rich dataset of stories, images, and sounds.

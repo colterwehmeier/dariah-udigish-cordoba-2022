@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>  
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin">
+    <title>Dariah Cloud Map</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  
+  <body>
+
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- LEAFLET -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+
+    <!-- Make sure you put this AFTER Leaflet's CSS -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+        integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+        crossorigin=""></script>
+
+    <!-- Omnivore is a parsing library to allow leaflet to load KML files -->
+    <script src='javascript/leaflet-omnivore.min.js'></script>
+
+    <!-- another parser for shape files -->
+    <script src='https://unpkg.com/shpjs@latest/dist/shp.js'></script>
+    <script src='javascript/leaflet.shpfile.js'></script>
+
+    
+    <!-- Marker Clustering Manager for Leaflet-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/MarkerCluster.Default.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.4.1/leaflet.markercluster.js"></script>
+
+
+    
+    <!-- Scripts-->
+    <script src="javascript/textmanagement.js"></script>
+    <script src="javascript/filemanagement.js"></script>
+    <script src="javascript/app.js"></script>
+
+    <div class="flex-container">
+    <div id="first-div" class="flex-item">
+      <div id="map"></div>
+    </div>
+    <div id="second-div" class="flex-item">
+      <i id="close-btn" class="fas fa-times">X</i>
+      <a id="lang-btn" style="display:none">es</a>
+      <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const lang = urlParams.get('lang');
+        Generate();
+        function Generate(){
+          setLanguageToggleVisible(true);
+            if (lang === 'en') {
+            fetch('landingPage/landing-en.html')
+              .then(response => response.text())
+              .then(data => {
+                document.getElementById('sidebar').innerHTML = data;
+                // your map initialization code goes here
+                var langBtn = document.getElementById('lang-btn');
+                  langBtn.innerText = 'ES';
+                  langBtn.style.display = 'block';
+                  var currentUrl = window.location.href;
+
+                  // Remove any existing lang parameter from the URL
+                  if (currentUrl.indexOf('?lang=') > -1) {
+                    currentUrl = currentUrl.replace(/\?lang=[^&]*/g, '');
+                  }
+                  currentUrl+="?lang=es";
+                  langBtn.setAttribute('href', currentUrl);
+              });
+            } else {
+              fetch('landingPage/landing-es.html')
+                .then(response => response.text())
+                .then(data => {
+                  document.getElementById('sidebar').innerHTML = data;
+                  // your map initialization code goes here
+                  var langBtn = document.getElementById('lang-btn');
+                  langBtn.innerText = 'EN';
+                  langBtn.style.display = 'block';
+                  var currentUrl = window.location.href;
+
+                  // Remove any existing lang parameter from the URL
+                  if (currentUrl.indexOf('?lang=') > -1) {
+                    currentUrl = currentUrl.replace(/\?lang=[^&]*/g, '');
+                  }
+                  currentUrl+="?lang=en";
+                  langBtn.setAttribute('href', currentUrl);
+                });
+            }
+        }
+        /*close button*/
+        
+        const closeButton = document.getElementById('close-btn');
+        closeButton.addEventListener('click', () => Generate());
+        
+        
+
+        
+        // your map initialization code goes here
+      </script>
+
+      <div id="sidebar">
+
+      </div>
+    </div>
+  </body>
+</html>
